@@ -386,7 +386,7 @@ const taskListElement = boardElement.querySelector(`.board__tasks`);
 
 render(taskListElement, createTaskEditTemplate());
 
-Array(TASK_COUNT).fill('').forEach(() => {
+Array(TASK_COUNT).fill(``).forEach(() => {
   render(taskListElement, createTaskTemplate());
 });
 
