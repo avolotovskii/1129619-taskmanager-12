@@ -369,25 +369,25 @@ const createLoadMoreButtonTemplate = () => {
   );
 };
 
-const render = (container, template, place) => {
+const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
 
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
-render(siteHeaderElement, createSiteMenuTemplate(), `beforeend`);
+render(siteHeaderElement, createSiteMenuTemplate());
 
-render(siteMainElement, createFilterTemplate(), `beforeend`);
-render(siteMainElement, createBoardTemplate(), `beforeend`);
+render(siteMainElement, createFilterTemplate());
+render(siteMainElement, createBoardTemplate());
 
 const boardElement = siteMainElement.querySelector(`.board`);
 const taskListElement = boardElement.querySelector(`.board__tasks`);
 
-render(taskListElement, createTaskEditTemplate(), `beforeend`);
+render(taskListElement, createTaskEditTemplate());
 
-for (let i = 0; i < TASK_COUNT; i++) {
-  render(taskListElement, createTaskTemplate(), `beforeend`);
-}
+Array(TASK_COUNT).fill('').forEach(() => {
+  render(taskListElement, createTaskTemplate());
+});
 
-render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
+render(boardElement, createLoadMoreButtonTemplate());
