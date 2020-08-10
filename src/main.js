@@ -29,7 +29,7 @@ const taskListElement = boardElement.querySelector(`.board__tasks`);
 
 render(taskListElement, createTaskEditTemplate(tasks[0]));
 
-Array(Math.min(tasks.length, TASK_COUNT_PER_STEP)).fill(``).forEach((el, index) => {
+Array(Math.min(tasks.length, TASK_COUNT_PER_STEP - 1)).fill(``).forEach((el, index) => {
   render(taskListElement, createTaskTemplate(tasks[index]));
 });
 
