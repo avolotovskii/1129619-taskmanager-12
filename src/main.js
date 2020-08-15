@@ -8,7 +8,7 @@ import SortView from "./view/sort.js";
 import TaskListView from "./view/task-list.js";
 import {generateTask} from "./mock/task.js";
 import {generateFilter} from "./mock/filter.js";
-import {render, RenderPosition} from "./utils.js";
+import {render} from "./utils.js";
 
 const TASK_COUNT = 22;
 const TASK_COUNT_PER_STEP = 8;
@@ -40,18 +40,18 @@ const renderTask = (taskListElement, task) => {
     replaceFormToCard();
   });
 
-  render(taskListElement, taskComponent.getElement(), RenderPosition.BEFOREEND);
+  render(taskListElement, taskComponent.getElement());
 };
 
-render(siteHeaderElement, new SiteMenuView().getElement(), RenderPosition.BEFOREEND);
-render(siteMainElement, new FilterView(filters).getElement(), RenderPosition.BEFOREEND);
+render(siteHeaderElement, new SiteMenuView().getElement());
+render(siteMainElement, new FilterView(filters).getElement());
 
 const boardComponent = new BoardView();
-render(siteMainElement, boardComponent.getElement(), RenderPosition.BEFOREEND);
-render(boardComponent.getElement(), new SortView().getElement(), RenderPosition.AFTERBEGIN);
+render(siteMainElement, boardComponent.getElement());
+render(boardComponent.getElement(), new SortView().getElement());
 
 const taskListComponent = new TaskListView();
-render(boardComponent.getElement(), taskListComponent.getElement(), RenderPosition.BEFOREEND);
+render(boardComponent.getElement(), taskListComponent.getElement());
 
 Array(Math.min(tasks.length, TASK_COUNT_PER_STEP - 1)).fill(``).forEach((el, index) => {
   renderTask(taskListComponent.getElement(), tasks[index]);
@@ -61,7 +61,7 @@ if (tasks.length > TASK_COUNT_PER_STEP) {
   let renderedTaskCount = TASK_COUNT_PER_STEP;
   const loadMoreButtonComponent = new LoadMoreButtonView();
 
-  render(boardComponent.getElement(), loadMoreButtonComponent.getElement(), RenderPosition.BEFOREEND);
+  render(boardComponent.getElement(), loadMoreButtonComponent.getElement());
 
   loadMoreButtonComponent.getElement().addEventListener(`click`, (evt) => {
     evt.preventDefault();
