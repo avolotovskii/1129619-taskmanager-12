@@ -8,7 +8,7 @@ import SortView from "./view/sort.js";
 import TaskListView from "./view/task-list.js";
 import {generateTask} from "./mock/task.js";
 import {generateFilter} from "./mock/filter.js";
-import {render} from "./utils.js";
+import {render, RenderPosition} from "./utils.js";
 
 const TASK_COUNT = 22;
 const TASK_COUNT_PER_STEP = 8;
@@ -40,28 +40,28 @@ const renderTask = (taskListElement, task) => {
     replaceFormToCard();
   });
 
-  render(taskListElement, taskComponent.getElement());
+  render(taskListElement, taskComponent.getElement(), RenderPosition.BEFOREEND);
 };
 
-render(siteHeaderElement, new SiteMenuView().getElement());
-render(siteMainElement, new FilterView(filters).getElement());
+render(siteHeaderElement, new SiteMenuView().getElement(), RenderPosition.BEFOREEND);
+render(siteMainElement, new FilterView(filters).getElement(), RenderPosition.BEFOREEND);
 
 const boardComponent = new BoardView();
-render(siteMainElement, boardComponent.getElement());
-render(boardComponent.getElement(), new SortView().getElement());
+render(siteMainElement, boardComponent.getElement(), RenderPosition.BEFOREEND);
+render(boardComponent.getElement(), new SortView().getElement(), RenderPosition.AFTERBEGIN);
 
 const taskListComponent = new TaskListView();
-render(boardComponent.getElement(), taskListComponent.getElement());
+render(boardComponent.getElement(), taskListComponent.getElement(), RenderPosition.BEFOREEND);
 
-Array(Math.min(tasks.length, TASK_COUNT_PER_STEP - 1)).fill(``).forEach((el, index) => {
-  renderTask(taskListComponent.getElement(), tasks[index]);
+Array(Math.min(tasks.length, TASK_COUNT_PER_STEP)).fill(``).forEach((el, index) => {
+  renderTask(taskListComponent.getElement(), tasks[index], RenderPosition.BEFOREEND);
 });
 
 if (tasks.length > TASK_COUNT_PER_STEP) {
   let renderedTaskCount = TASK_COUNT_PER_STEP;
   const loadMoreButtonComponent = new LoadMoreButtonView();
 
-  render(boardComponent.getElement(), loadMoreButtonComponent.getElement());
+  render(boardComponent.getElement(), loadMoreButtonComponent.getElement(), RenderPosition.BEFOREEND);
 
   loadMoreButtonComponent.getElement().addEventListener(`click`, (evt) => {
     evt.preventDefault();
