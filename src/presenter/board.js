@@ -11,22 +11,23 @@ const TASK_COUNT_PER_STEP = 8;
 
 export default class Board {
   constructor(boardContainer) {
-    this._boardConainer = boardContainer;
-    this._renderTaskCount = TASK_COUNT_PER_STEP;
+    this._boardContainer = boardContainer;
+    this._renderedTaskCount = TASK_COUNT_PER_STEP;
 
     this._boardComponent = new BoardView();
     this._sortComponent = new SortView();
     this._taskListComponent = new TaskListView();
     this._noTaskComponent = new NoTaskView();
-    this._LoadMoreButton = new MoreButtonView();
+    this._loadMoreButtonComponent = new MoreButtonView();
 
     this._handleLoadMoreButtonClick = this._handleLoadMoreButtonClick.bind(this);
   }
 
-  init(boardTask) {
-    this._boardTasks = boardTask.slice();
-    render(this.boardContainer, this.boardComponent, RenderPosition.BEFOREEND);
-    render(this.getElement(), this.taskListComponent, RenderPosition.BEFOREEND);
+  init(boardTasks) {
+    this._boardTasks = boardTasks.slice();
+
+    render(this._boardContainer, this._boardComponent, RenderPosition.BEFOREEND);
+    render(this._boardComponent, this._taskListComponent, RenderPosition.BEFOREEND);
 
     this._renderBoard();
   }
@@ -108,7 +109,6 @@ export default class Board {
     }
 
     this._renderSort();
-
     this._renderTaskList();
   }
 }
