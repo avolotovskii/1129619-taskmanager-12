@@ -13,3 +13,8 @@ export const MIN_DESCRIPTION = 1;
 export const MIN_COMMENTS_AMOUNT = 0;
 export const MAX_COMMENTS_AMOUNT = 0;
 
+export const SortType = {
+  DEFAULT: `default`,
+  DATE_DOWN: `date-down`,
+  DATE_UP: `date-up`
+};
