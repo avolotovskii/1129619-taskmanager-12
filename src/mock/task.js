@@ -1,6 +1,6 @@
 import {COLORS} from "../const.js";
-import {getRandomInteger} from "../utils.js";
-import {getCurrentDate} from "../utils.js";
+import {getRandomInteger} from "../utils/common.js";
+import {getCurrentDate} from "../utils/task.js";
 
 const generateDescription = () => {
   const descriptions = [
