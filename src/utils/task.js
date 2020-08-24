@@ -15,10 +15,6 @@ export const isTaskExpired = (dueDate) => {
   return currentDate.getTime() > dueDate.getTime();
 };
 
-export const isTaskRepeating = (repeating) => {
-  return Object.values(repeating).some(Boolean);
-};
-
 export const isTaskExpiringToday = (dueDate) => {
   if (dueDate === null) {
     return false;
@@ -29,10 +25,13 @@ export const isTaskExpiringToday = (dueDate) => {
   return currentDate.getTime() === dueDate.getTime();
 };
 
+export const isTaskRepeating = (repeating) => {
+  return Object.values(repeating).some(Boolean);
+};
+
 export const humanizeTaskDueDate = (dueDate) => {
   return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
 };
-
 
 const getWeightForNullDate = (dateA, dateB) => {
   if (dateA === null && dateB === null) {
