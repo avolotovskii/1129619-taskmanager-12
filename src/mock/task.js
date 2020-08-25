@@ -1,6 +1,5 @@
 import {COLORS} from "../const.js";
 import {getRandomInteger} from "../utils/common.js";
-import {getCurrentDate} from "../utils/task.js";
 
 const generateDescription = () => {
   const descriptions = [
@@ -12,6 +11,25 @@ const generateDescription = () => {
   const randomIndex = getRandomInteger(0, descriptions.length - 1);
 
   return descriptions[randomIndex];
+};
+
+const generateDate = () => {
+
+  const isDate = Boolean(getRandomInteger(0, 1));
+
+  if (!isDate) {
+    return null;
+  }
+
+  const maxDaysGap = 7;
+  const daysGap = getRandomInteger(-maxDaysGap, maxDaysGap);
+  const currentDate = new Date();
+
+  currentDate.setHours(23, 59, 59, 999);
+
+  currentDate.setDate(currentDate.getDate() + daysGap);
+
+  return new Date(currentDate);
 };
 
 const generateRepeating = () => {
@@ -33,7 +51,7 @@ const getRandomColor = () => {
 };
 
 export const generateTask = () => {
-  const dueDate = getCurrentDate();
+  const dueDate = generateDate();
   const repeating = dueDate === null
     ? generateRepeating()
     : {
