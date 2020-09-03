@@ -5,7 +5,6 @@ const createBoardTemplate = () => {
 };
 
 export default class Board extends AbstractView {
-
   getTemplate() {
     return createBoardTemplate();
   }
