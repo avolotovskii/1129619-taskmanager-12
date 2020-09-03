@@ -48,7 +48,7 @@ export default class Board {
 
   _handleTaskChange(updateTask) {
     this._boardTasks = updateItem(this._boardTasks, updateTask);
-    this._sourceBoardTasks = updateItem(this._sourceBoardTasks, updateTask);
+    this._sourcedBoardTasks = updateItem(this._sourcedBoardTasks, updateTask);
     this._taskPresenter[updateTask.id].init(updateTask);
   }
 
